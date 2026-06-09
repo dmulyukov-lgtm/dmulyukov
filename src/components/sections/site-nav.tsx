@@ -71,7 +71,7 @@ export function SiteNav() {
 
       <div
         id="mobile-nav"
-        hidden={!open}
+        aria-hidden={!open}
         className={cn(
           "overflow-hidden border-t border-border/60 lg:hidden",
           open ? "max-h-96" : "max-h-0",
