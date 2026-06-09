@@ -4,16 +4,16 @@ import { FadeIn } from "@/components/fade-in";
 
 const STATS: Record<"qa" | "em", { value: string; label: string }[]> = {
   qa: [
-    { value: "00", label: "Placeholder QA stat A" },
-    { value: "00", label: "Placeholder QA stat B" },
-    { value: "00", label: "Placeholder QA stat C" },
-    { value: "00", label: "Placeholder QA stat D" },
+    { value: "−60%", label: "regression effort & cycle time, with Playwright/TypeScript E2E built from scratch" },
+    { value: "80+", label: "QA engineers led across 12 product streams ($6.47B e-commerce)" },
+    { value: "20% → 35%", label: "integral UI performance; site moved 7th → 4th vs. local competitors" },
+    { value: "3", label: "QA functions built from the ground up" },
   ],
   em: [
-    { value: "00", label: "Placeholder EM stat A" },
-    { value: "00", label: "Placeholder EM stat B" },
-    { value: "00", label: "Placeholder EM stat C" },
-    { value: "00", label: "Placeholder EM stat D" },
+    { value: "2.5x", label: "lower QA-function cost, with no loss of quality" },
+    { value: "5 → 52", label: "team grown from outsourced to in-house in 3 years" },
+    { value: "3x", label: "budget cut absorbed with all QA functions preserved" },
+    { value: "4", label: "government-funded (RFRIT) product milestones delivered on time" },
   ],
 };
 
