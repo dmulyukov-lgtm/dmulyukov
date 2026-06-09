@@ -24,18 +24,20 @@ export function RoleSwitch({ size = "md" }: { size?: "sm" | "md" }) {
         return (
           <button
             key={opt.value}
+            type="button"
             role="radio"
             aria-checked={active}
+            aria-label={`View as ${opt.label}`}
             onClick={() => setRole(opt.value)}
             className={cn(
-              "rounded-full font-medium transition-all duration-200 whitespace-nowrap",
+              "rounded-full font-medium transition-all duration-200 whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
               isSm ? "px-3 py-1.5" : "px-4 py-2",
               active
                 ? "bg-primary text-primary-foreground shadow-soft"
                 : "text-muted-foreground hover:text-foreground",
             )}
           >
-            {isSm ? opt.short : opt.label}
+            <span aria-hidden="true">{isSm ? opt.short : opt.label}</span>
           </button>
         );
       })}
