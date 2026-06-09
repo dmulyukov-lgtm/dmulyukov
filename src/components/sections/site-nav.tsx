@@ -20,8 +20,8 @@ export function SiteNav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="/" className="font-display text-base font-semibold tracking-tight">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-3 sm:gap-4 sm:px-6">
+        <Link to="/" className="min-w-0 truncate font-display text-sm font-semibold tracking-tight sm:text-base">
           Danis Mulyukov
         </Link>
 
@@ -37,13 +37,13 @@ export function SiteNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
           <RoleSwitch size="sm" />
           <ThemeToggle />
           <a
             href="mailto:hello@example.com"
             aria-label="Email"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
           >
             <Mail className="h-4 w-4" />
           </a>
@@ -52,7 +52,7 @@ export function SiteNav() {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
-            className="hidden h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
+            className="hidden h-10 w-10 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
           >
             <Linkedin className="h-4 w-4" />
           </a>
@@ -61,7 +61,7 @@ export function SiteNav() {
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground lg:hidden"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground lg:hidden"
           >
             {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
@@ -75,13 +75,13 @@ export function SiteNav() {
           "transition-[max-height] duration-300 ease-in-out",
         )}
       >
-        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6" aria-label="Mobile">
+        <nav className="mx-auto flex max-w-6xl flex-col gap-1 px-3 py-3 sm:px-6" aria-label="Mobile">
           {LINKS.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="rounded-md px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+              className="flex min-h-11 items-center rounded-md px-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             >
               {l.label}
             </a>
