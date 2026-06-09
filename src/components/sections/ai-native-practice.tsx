@@ -11,11 +11,32 @@ export function AINativePractice() {
               <Sparkles className="h-3.5 w-3.5" /> AI-native practice
             </div>
             <h2 id="ai-heading" className="mt-5 max-w-3xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-              Placeholder headline for AI-native practice
+              AI as a working layer
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Placeholder paragraph describing how AI tooling is woven into day-to-day delivery and quality work.
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              I use AI across QA, delivery and product work — preliminary analysis, log review,
+              requirements validation, RCA scaffolding, and rapid prototyping — while keeping human
+              judgment over every conclusion. Playwright MCP for browser-based investigation;
+              Lovable and Codex for building small, real tools. The Ishikawa Builder and a
+              personal finance tracker came out of this practice: idea-to-usable-artifact shrank
+              from weeks to a few evenings.
             </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {[
+                "AI-assisted RCA",
+                "Requirements validation",
+                "Prompt/context engineering",
+                "Playwright MCP",
+                "Human-in-the-loop QA",
+              ].map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground"
+                >
+                  {chip}
+                </span>
+              ))}
+            </div>
           </div>
         </FadeIn>
       </div>
