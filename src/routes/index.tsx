@@ -22,17 +22,23 @@ export const Route = createFileRoute("/")({
   validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
-      { title: "Danis Mulyukov — QA Lead & Delivery / Engineering Manager" },
+      { title: "Danis Mulyukov — QA Lead / Delivery & Engineering Manager" },
       {
         name: "description",
         content:
-          "Senior tech leader with 15+ years across QA leadership and engineering delivery management.",
+          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
       },
-      { property: "og:title", content: "Danis Mulyukov — QA Lead & Delivery / Engineering Manager" },
+      { property: "og:title", content: "Danis Mulyukov — QA Lead / Delivery & Engineering Manager" },
+      { name: "twitter:title", content: "Danis Mulyukov — QA Lead / Delivery & Engineering Manager" },
       {
         property: "og:description",
         content:
-          "Senior tech leader with 15+ years across QA leadership and engineering delivery management.",
+          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
       },
     ],
   }),
