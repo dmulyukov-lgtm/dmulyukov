@@ -1,10 +1,22 @@
 import { FadeIn } from "@/components/fade-in";
 
 const PRINCIPLES = [
-  { title: "Principle one", body: "Placeholder description of the first leadership principle." },
-  { title: "Principle two", body: "Placeholder description of the second leadership principle." },
-  { title: "Principle three", body: "Placeholder description of the third leadership principle." },
-  { title: "Principle four", body: "Placeholder description of the fourth leadership principle." },
+  {
+    title: "Quality is a management signal, not a test count.",
+    body: "I build metrics loops — lead time, escaped defects, regression cost, automation coverage — so leadership can see release risk and systemic bottlenecks, not just pass/fail.",
+  },
+  {
+    title: "Risk-based, shift-left by default.",
+    body: "I turn production incidents into stronger validation gates, realistic regression scope, and earlier checks on the workflows that actually matter to customers.",
+  },
+  {
+    title: "I grow people, not just process.",
+    body: "I've built management benches from junior hires — QA leads, test managers, an automation tech lead — and handed functions over without losing manageability.",
+  },
+  {
+    title: "AI is a working layer; accountability stays human.",
+    body: "I use AI to compress analysis, RCA scaffolding and prototyping, and keep human QA judgment over every conclusion.",
+  },
 ];
 
 export function LeadershipApproach() {
@@ -14,17 +26,17 @@ export function LeadershipApproach() {
         <FadeIn>
           <p className="text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">Approach</p>
           <h2 id="approach-heading" className="mt-3 max-w-2xl font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-            How I lead
+            How I work
           </h2>
         </FadeIn>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2">
           {PRINCIPLES.map((p, i) => (
             <FadeIn key={i} delay={i * 80}>
-              <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-lift">
+              <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-lift sm:p-7">
                 <div className="font-display text-sm font-semibold uppercase tracking-wider text-primary">0{i + 1}</div>
-                <h3 className="mt-3 font-display text-lg font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                <h3 className="mt-3 font-display text-lg font-semibold leading-snug">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
               </div>
             </FadeIn>
           ))}
