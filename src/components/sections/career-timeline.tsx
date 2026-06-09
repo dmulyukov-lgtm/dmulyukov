@@ -96,17 +96,17 @@ export function CareerTimeline() {
               <span className="absolute -left-[33px] top-6 h-2.5 w-2.5 rounded-full bg-primary ring-4 ring-background sm:-left-[37px]" />
               <details
                 open={e.defaultOpen}
-                className="group rounded-2xl border border-border bg-card p-5 shadow-soft transition-shadow open:shadow-lift"
+                className="group rounded-2xl border border-border bg-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-lift open:shadow-lift motion-reduce:transform-none motion-reduce:transition-none"
               >
-                <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-4 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-card">
                   <div>
                     <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                       {e.period}
                     </div>
-                    <div className="mt-1 font-display text-lg font-semibold">{e.title}</div>
+                    <div className="mt-1 font-display text-lg font-semibold transition-colors group-hover:text-primary">{e.title}</div>
                     <div className="text-sm text-muted-foreground">{e.company}</div>
                   </div>
-                  <ChevronDown className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform group-open:rotate-180" />
+                  <ChevronDown className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200 group-open:rotate-180 motion-reduce:transition-none" />
                 </summary>
                 <div className="mt-4 border-t border-border/60 pt-4">
                   <p className="text-sm italic text-muted-foreground">{e.context}</p>

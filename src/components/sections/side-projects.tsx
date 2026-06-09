@@ -75,8 +75,8 @@ export function SideProjects() {
               <FadeIn key={i} delay={i * 80}>
                 <Wrapper
                   {...wrapperProps}
-                  className={`group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-soft transition-all ${
-                    p.href ? "hover:-translate-y-1 hover:shadow-lift" : ""
+                  className={`group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-soft transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transform-none motion-reduce:transition-none ${
+                    p.href ? "hover:-translate-y-1 hover:border-primary/30 hover:shadow-lift" : ""
                   }`}
                 >
                   <div className="flex items-start justify-between gap-3">
