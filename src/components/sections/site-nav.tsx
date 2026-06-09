@@ -38,9 +38,7 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <div className="hidden md:block">
-            <RoleSwitch size="sm" />
-          </div>
+          <RoleSwitch size="sm" />
           <ThemeToggle />
           <a
             href="mailto:hello@example.com"
