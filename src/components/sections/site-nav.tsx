@@ -86,9 +86,6 @@ export function SiteNav() {
               {l.label}
             </a>
           ))}
-          <div className="mt-2 md:hidden">
-            <RoleSwitch size="sm" />
-          </div>
         </nav>
       </div>
     </header>
