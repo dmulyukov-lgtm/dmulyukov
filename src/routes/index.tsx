@@ -26,19 +26,36 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
+          "I build teams and systems that ship quality software predictably. 15+ years across QA leadership and engineering/delivery management — three QA functions built from scratch, now working AI-native.",
       },
       { property: "og:title", content: "Danis Mulyukov — QA Lead / Delivery & Engineering Manager" },
       { name: "twitter:title", content: "Danis Mulyukov — QA Lead / Delivery & Engineering Manager" },
       {
         property: "og:description",
         content:
-          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
+          "I build teams and systems that ship quality software predictably. 15+ years across QA leadership and engineering/delivery management — three QA functions built from scratch, now working AI-native.",
       },
       {
         name: "twitter:description",
         content:
-          "15+ years across QA leadership and engineering/delivery management. Three QA functions built from scratch. Now working AI-native.",
+          "I build teams and systems that ship quality software predictably. 15+ years across QA leadership and engineering/delivery management — three QA functions built from scratch, now working AI-native.",
+      },
+      { property: "og:url", content: "https://dmulyukov.lovable.app/" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://dmulyukov.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Danis Mulyukov",
+          jobTitle: "QA Lead / Delivery & Engineering Manager",
+          url: "https://dmulyukov.lovable.app/",
+          sameAs: ["https://www.linkedin.com/in/danis-mulyukov/"],
+        }),
       },
     ],
   }),
