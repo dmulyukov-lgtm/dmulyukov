@@ -1,10 +1,10 @@
 name: Build and Deploy to GitHub Pages
 
 on:
-  # Trigger the workflow on push to the main branch
+  # Trigger the workflow on push or merge to the test branch
   push:
     branches:
-      - main
+      - test
   # Allow manual trigger from the Actions tab
   workflow_dispatch:
 
