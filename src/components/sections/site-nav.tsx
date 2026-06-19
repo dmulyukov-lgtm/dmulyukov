@@ -10,6 +10,7 @@ const LINKS = [
   { href: "#approach", label: "Approach" },
   { href: "#career", label: "Career" },
   { href: "#projects", label: "Projects" },
+  { href: "#quality-engineering", label: "Quality Engineering" },
   { href: "#skills", label: "Skills" },
   { href: "#writing", label: "Writing" },
   { href: "#contact", label: "Contact" },
