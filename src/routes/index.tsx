@@ -9,7 +9,6 @@ import { LeadershipApproach } from "@/components/sections/leadership-approach";
 import { CareerTimeline } from "@/components/sections/career-timeline";
 import { SideProjects } from "@/components/sections/side-projects";
 import { AINativePractice } from "@/components/sections/ai-native-practice";
-import { QualityEngineering } from "@/components/sections/quality-engineering";
 import { SkillsMap } from "@/components/sections/skills-map";
 import { Writing } from "@/components/sections/writing";
 import { Contact } from "@/components/sections/contact";
@@ -74,7 +73,6 @@ function Index() {
         <CareerTimeline />
         <SideProjects />
         <AINativePractice />
-        <QualityEngineering />
         <SkillsMap />
         <Writing />
         <Contact />
