@@ -24,7 +24,7 @@ export function StatBand() {
 
   return (
     <section aria-label="Key metrics" className="border-y border-border/60 bg-muted/30">
-      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden bg-border/60 sm:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl grid-cols-2 gap-px overflow-hidden bg-border/60 sm:grid-cols-4 lg:grid-cols-5">
         {stats.map((s, i) => (
           <FadeIn key={i} delay={i * 60} className="bg-background p-5 sm:p-8">
             <div className="font-display text-2xl font-semibold tracking-tight sm:text-4xl">
