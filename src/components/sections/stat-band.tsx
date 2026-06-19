@@ -8,6 +8,7 @@ const STATS: Record<"qa" | "em", { value: string; label: string }[]> = {
     { value: "80+", label: "QA engineers led across 12 product streams ($6.47B e-commerce)" },
     { value: "20% → 35%", label: "integral UI performance; site moved 7th → 4th vs. local competitors" },
     { value: "3", label: "QA functions built from the ground up" },
+    { value: "22", label: "automated E2E scenarios covering this site" },
   ],
   em: [
     { value: "2.5x", label: "lower QA-function cost, with no loss of quality" },
