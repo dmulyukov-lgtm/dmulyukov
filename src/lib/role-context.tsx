@@ -34,14 +34,23 @@ function captureViewportAnchor() {
 
   const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
   const targetY = Math.min(window.innerHeight - 1, Math.max(0, headerBottom + 24));
-  const selector = "main h1, main h2, main h3, main p, main li, main details, main section";
+  const contentSelector = "main h1, main h2, main h3, main p, main li, main details";
+  const sectionSelector = "main section";
   const pointedAnchor = [0.5, 0.25, 0.75]
-    .map((x) => document.elementFromPoint(window.innerWidth * x, targetY)?.closest(selector))
+    .map((x) => document.elementFromPoint(window.innerWidth * x, targetY)?.closest(contentSelector))
     .find((element): element is HTMLElement => element instanceof HTMLElement);
-  const visibleAnchors = Array.from(document.querySelectorAll<HTMLElement>(selector)).filter((element) => {
-    const rect = element.getBoundingClientRect();
-    return rect.bottom > headerBottom && rect.top < window.innerHeight;
-  });
+  const visibleAnchors = Array.from(document.querySelectorAll<HTMLElement>(contentSelector)).filter(
+    (element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.bottom > headerBottom && rect.top < window.innerHeight;
+    },
+  );
+  const visibleSections = Array.from(document.querySelectorAll<HTMLElement>(sectionSelector)).filter(
+    (section) => {
+      const rect = section.getBoundingClientRect();
+      return rect.bottom > headerBottom && rect.top < window.innerHeight;
+    },
+  );
   const anchor =
     pointedAnchor ??
     visibleAnchors.reduce<HTMLElement | null>((closest, element) => {
@@ -49,7 +58,9 @@ function captureViewportAnchor() {
       const currentDistance = Math.abs(element.getBoundingClientRect().top - targetY);
       const closestDistance = Math.abs(closest.getBoundingClientRect().top - targetY);
       return currentDistance < closestDistance ? element : closest;
-    }, null);
+    }, null) ??
+    visibleSections[0] ??
+    null;
 
   return anchor ? { element: anchor, top: anchor.getBoundingClientRect().top } : null;
 }
@@ -92,11 +103,7 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     [role],
   );
 
-  return (
-    <RoleContext.Provider value={{ role, setRole }}>
-      {children}
-    </RoleContext.Provider>
-  );
+  return <RoleContext.Provider value={{ role, setRole }}>{children}</RoleContext.Provider>;
 }
 
 export function useRole() {
