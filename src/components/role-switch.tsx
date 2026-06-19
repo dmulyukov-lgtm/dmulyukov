@@ -14,16 +14,28 @@ export function RoleSwitch({ size = "md" }: { size?: "sm" | "md" }) {
 
   const handleChange = (next: Role) => {
     if (next === role) return;
-    const el = containerRef.current;
-    const offsetBefore = el ? el.getBoundingClientRect().top : 0;
+    // Anchor to the section currently visible at the top of the viewport,
+    // so role-dependent content height changes don't shift what the user sees.
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("main section[id]"),
+    );
+    const anchorOffset = 80; // approx sticky header height
+    let anchor: HTMLElement | null = null;
+    let anchorTopBefore = 0;
+    for (const s of sections) {
+      const top = s.getBoundingClientRect().top;
+      if (top <= anchorOffset + 1) {
+        anchor = s;
+        anchorTopBefore = top;
+      } else {
+        break;
+      }
+    }
     setRole(next);
-    // After layout settles from role-dependent content changes,
-    // restore the switch's viewport position so the user doesn't lose place.
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        if (!el) return;
-        const offsetAfter = el.getBoundingClientRect().top;
-        const delta = offsetAfter - offsetBefore;
+        if (!anchor) return;
+        const delta = anchor.getBoundingClientRect().top - anchorTopBefore;
         if (Math.abs(delta) > 1) {
           window.scrollBy({ top: delta, left: 0, behavior: "auto" });
         }
