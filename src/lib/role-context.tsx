@@ -45,7 +45,7 @@ function captureViewportAnchor() {
   const anchor =
     pointedAnchor ??
     visibleAnchors.reduce<HTMLElement | null>((closest, element) => {
-      if (!closest) return section;
+      if (!closest) return element;
       const currentDistance = Math.abs(element.getBoundingClientRect().top - targetY);
       const closestDistance = Math.abs(closest.getBoundingClientRect().top - targetY);
       return currentDistance < closestDistance ? element : closest;
