@@ -45,12 +45,12 @@ function captureViewportAnchor() {
       return rect.bottom > headerBottom && rect.top < window.innerHeight;
     },
   );
-  const visibleSections = Array.from(document.querySelectorAll<HTMLElement>(sectionSelector)).filter(
-    (section) => {
-      const rect = section.getBoundingClientRect();
-      return rect.bottom > headerBottom && rect.top < window.innerHeight;
-    },
-  );
+  const visibleSections = Array.from(
+    document.querySelectorAll<HTMLElement>(sectionSelector),
+  ).filter((section) => {
+    const rect = section.getBoundingClientRect();
+    return rect.bottom > headerBottom && rect.top < window.innerHeight;
+  });
   const anchor =
     pointedAnchor ??
     visibleAnchors.reduce<HTMLElement | null>((closest, element) => {
