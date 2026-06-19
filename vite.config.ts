@@ -7,8 +7,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  // Динамический пресет: Vercel для деплоя, node-server для локалхоста и GitHub Actions
-  nitro: {
-    preset: process.env.VERCEL ? 'vercel' : 'node-server'
-  }
+  // Если мы на Vercel - добавляем настройку. Если в GitHub Actions - блок nitro даже не появится.
+  ...(process.env.VERCEL ? { nitro: { preset: 'vercel' } } : {})
 });
