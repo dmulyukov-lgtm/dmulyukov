@@ -7,8 +7,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
-  // Заставляем плагин скомпилировать сайт под Vercel (в обход Cloudflare)
+  // Динамический пресет: Vercel для деплоя, node-server для локалхоста и GitHub Actions
   nitro: {
-    preset: 'vercel'
+    preset: process.env.VERCEL ? 'vercel' : 'node-server'
   }
 });
