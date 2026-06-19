@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { flushSync } from "react-dom";
 
 export type Role = "qa" | "em";
 
@@ -28,6 +29,57 @@ function getInitial(): Role {
   return "qa";
 }
 
+function captureViewportAnchor() {
+  if (typeof window === "undefined") return null;
+
+  const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
+  const targetY = Math.min(window.innerHeight - 1, Math.max(0, headerBottom + 24));
+  const contentSelector = "main h1, main h2, main h3, main p, main li, main details";
+  const sectionSelector = "main section";
+  const pointedAnchor = [0.5, 0.25, 0.75]
+    .map((x) => document.elementFromPoint(window.innerWidth * x, targetY)?.closest(contentSelector))
+    .find((element): element is HTMLElement => element instanceof HTMLElement);
+  const visibleAnchors = Array.from(document.querySelectorAll<HTMLElement>(contentSelector)).filter(
+    (element) => {
+      const rect = element.getBoundingClientRect();
+      return rect.bottom > headerBottom && rect.top < window.innerHeight;
+    },
+  );
+  const visibleSections = Array.from(
+    document.querySelectorAll<HTMLElement>(sectionSelector),
+  ).filter((section) => {
+    const rect = section.getBoundingClientRect();
+    return rect.bottom > headerBottom && rect.top < window.innerHeight;
+  });
+  const anchor =
+    pointedAnchor ??
+    visibleAnchors.reduce<HTMLElement | null>((closest, element) => {
+      if (!closest) return element;
+      const currentDistance = Math.abs(element.getBoundingClientRect().top - targetY);
+      const closestDistance = Math.abs(closest.getBoundingClientRect().top - targetY);
+      return currentDistance < closestDistance ? element : closest;
+    }, null) ??
+    visibleSections[0] ??
+    null;
+
+  return anchor ? { element: anchor, top: anchor.getBoundingClientRect().top } : null;
+}
+
+function restoreViewportAnchor(anchor: ReturnType<typeof captureViewportAnchor>) {
+  if (!anchor || !document.contains(anchor.element)) return;
+  const delta = anchor.element.getBoundingClientRect().top - anchor.top;
+  if (Math.abs(delta) > 1) {
+    window.scrollBy({ top: delta, left: 0, behavior: "auto" });
+  }
+}
+
+function syncRoleUrl(role: Role) {
+  const url = new URL(window.location.href);
+  if (url.searchParams.get("role") === role) return;
+  url.searchParams.set("role", role);
+  History.prototype.replaceState.call(window.history, window.history.state, "", url.toString());
+}
+
 export function RoleProvider({ children }: { children: ReactNode }) {
   const [role, setRoleState] = useState<Role>("qa");
 
@@ -35,20 +87,23 @@ export function RoleProvider({ children }: { children: ReactNode }) {
     setRoleState(getInitial());
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("role", role);
-    const url = new URL(window.location.href);
-    if (url.searchParams.get("role") !== role) {
-      url.searchParams.set("role", role);
-      window.history.replaceState({}, "", url.toString());
-    }
-  }, [role]);
+  const setRole = useCallback(
+    (next: Role) => {
+      if (next === role) return;
 
-  return (
-    <RoleContext.Provider value={{ role, setRole: setRoleState }}>
-      {children}
-    </RoleContext.Provider>
+      const anchor = captureViewportAnchor();
+      flushSync(() => setRoleState(next));
+      localStorage.setItem("role", next);
+      syncRoleUrl(next);
+      restoreViewportAnchor(anchor);
+      requestAnimationFrame(() => restoreViewportAnchor(anchor));
+      window.setTimeout(() => restoreViewportAnchor(anchor), 220);
+      window.setTimeout(() => restoreViewportAnchor(anchor), 320);
+    },
+    [role],
   );
+
+  return <RoleContext.Provider value={{ role, setRole }}>{children}</RoleContext.Provider>;
 }
 
 export function useRole() {
