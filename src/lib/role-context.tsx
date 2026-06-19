@@ -33,22 +33,22 @@ function captureViewportAnchor() {
   if (typeof window === "undefined") return null;
 
   const headerBottom = document.querySelector("header")?.getBoundingClientRect().bottom ?? 0;
-  const y = Math.min(window.innerHeight - 1, Math.max(0, headerBottom + 12));
-  const pointedSection = document
-    .elementFromPoint(window.innerWidth / 2, y)
-    ?.closest("main section") as HTMLElement | null;
-  const sections = Array.from(document.querySelectorAll<HTMLElement>("main section"));
+  const targetY = Math.min(window.innerHeight - 1, Math.max(0, headerBottom + 24));
+  const selector = "main h1, main h2, main h3, main p, main li, main details, main section";
+  const pointedAnchor = [0.5, 0.25, 0.75]
+    .map((x) => document.elementFromPoint(window.innerWidth * x, targetY)?.closest(selector))
+    .find((element): element is HTMLElement => element instanceof HTMLElement);
+  const visibleAnchors = Array.from(document.querySelectorAll<HTMLElement>(selector)).filter((element) => {
+    const rect = element.getBoundingClientRect();
+    return rect.bottom > headerBottom && rect.top < window.innerHeight;
+  });
   const anchor =
-    pointedSection ??
-    sections.find((section) => {
-      const rect = section.getBoundingClientRect();
-      return rect.top <= y && rect.bottom >= y;
-    }) ??
-    sections.reduce<HTMLElement | null>((closest, section) => {
+    pointedAnchor ??
+    visibleAnchors.reduce<HTMLElement | null>((closest, element) => {
       if (!closest) return section;
-      const currentDistance = Math.abs(section.getBoundingClientRect().top - y);
-      const closestDistance = Math.abs(closest.getBoundingClientRect().top - y);
-      return currentDistance < closestDistance ? section : closest;
+      const currentDistance = Math.abs(element.getBoundingClientRect().top - targetY);
+      const closestDistance = Math.abs(closest.getBoundingClientRect().top - targetY);
+      return currentDistance < closestDistance ? element : closest;
     }, null);
 
   return anchor ? { element: anchor, top: anchor.getBoundingClientRect().top } : null;
