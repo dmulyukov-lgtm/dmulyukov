@@ -86,6 +86,8 @@ export function RoleProvider({ children }: { children: ReactNode }) {
       syncRoleUrl(next);
       restoreViewportAnchor(anchor);
       requestAnimationFrame(() => restoreViewportAnchor(anchor));
+      window.setTimeout(() => restoreViewportAnchor(anchor), 220);
+      window.setTimeout(() => restoreViewportAnchor(anchor), 320);
     },
     [role],
   );
